@@ -28,7 +28,7 @@ export class DefaultAuthenticator implements IAuthenticator {
         sessionStorage.setItem("accessToken", accessToken.toString());
     }
 
-    public async refreshAccessTokenFromHeader(responseHeaders: HttpHeader[] = []): Promise<string> {
+    public async refreshAccessTokenFromHeader(responseHeaders: HttpHeader[] = []): Promise<void> {
         const accessTokenHeader = responseHeaders.find(x => x.name.toLowerCase() === "ocp-apim-sas-token");
 
         if (accessTokenHeader?.value) {
@@ -39,7 +39,6 @@ export class DefaultAuthenticator implements IAuthenticator {
 
             if (current !== accessTokenString) {
                 sessionStorage.setItem("accessToken", accessTokenString);
-                return accessTokenString;
             }
         }
 

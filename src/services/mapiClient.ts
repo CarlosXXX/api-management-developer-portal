@@ -138,11 +138,8 @@ export class MapiClient {
             throw new Error(`Unable to complete request. Error: ${error.message}`);
         }
 
-        try {
+        if (this.authenticator.refreshAccessTokenFromHeader) {
             await this.authenticator.refreshAccessTokenFromHeader(response.headers);
-        }
-        catch (error) {
-            console.error("Refresh token error: ", error);
         }
 
         return await this.handleResponse<T>(response, httpRequest.url);
@@ -282,7 +279,7 @@ export class MapiClient {
         let host = "";
         try {
             host = window.location.host;
-        } catch (error){
+        } catch (error) {
             host = "publishing";
         }
 

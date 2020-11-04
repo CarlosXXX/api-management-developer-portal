@@ -17,7 +17,7 @@ export interface IAuthenticator {
      * Sets new token for the session from response header and return refreshed value
      * @param responseHeaders {HttpHeader[]} Response headers.
      */
-    refreshAccessTokenFromHeader(responseHeaders: HttpHeader[]): Promise<string>;
+    refreshAccessTokenFromHeader?(responseHeaders: HttpHeader[]): Promise<void>;
 
     /**
      * Clears access token from current session.
